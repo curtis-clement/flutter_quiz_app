@@ -12,17 +12,11 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  Widget? activeScreen;
-
-  @override
-  void initState() {
-    activeScreen = StartScreen(updateScreen);
-    super.initState();
-  }
+  var activeScreen = 'start-screen';
 
   void updateScreen() {
     setState(() {
-      activeScreen = const QuestionScreen();
+      activeScreen = 'question-screen';
     });
   }
 
@@ -38,7 +32,9 @@ class _QuizState extends State<Quiz> {
               colors: [ Color.fromARGB(255, 154, 228, 157), Color.fromARGB(255, 46, 160, 49) ],
             ),
           ),
-          child: activeScreen,
+          child: activeScreen == 'start-screen'
+            ? StartScreen(updateScreen)
+            : const QuestionScreen(),
         ),
       ),
     );
